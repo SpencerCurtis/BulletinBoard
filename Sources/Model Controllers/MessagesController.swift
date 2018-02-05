@@ -12,6 +12,7 @@ import UIKit
 
 extension MessagesController {
 	static let DidRefreshNotification = Notification.Name("DidRefreshNotification")
+    static let DidFinishSearchNotification = Notification.Name("DidFinishSearchNotification")
 }
 
 class MessagesController {
@@ -52,6 +53,31 @@ class MessagesController {
 			self.messages = records.flatMap { Message(cloudKitRecord: $0) }
 		}
 	}
+    
+    func fetchMessagesFromUserWith(email: String) {
+        
+        cloudKitManager.fetchUserIdentityWith(email: email) { (identity, error) in
+            if let error = error { print(error.localizedDescription) }
+            
+            guard let identity = identity,
+                let userRecordID = identity.userRecordID else { return }
+            
+            let predicate = NSPredicate(format: "creatorUserRecordID == %@", userRecordID)
+            
+            let query = CKQuery(recordType: Message.recordType, predicate: predicate)
+            
+            CKContainer.default().publicCloudDatabase.perform(query, inZoneWith: nil, completionHandler: { (records, error) in
+                
+                if let error = error { print("Error fetching message records from iCloud: \(error.localizedDescription)") }
+                
+                guard let records = records else { return }
+                
+                let messages = records.flatMap({ Message(cloudKitRecord: $0) })
+                
+                self.searchedUserMessages = messages
+            })
+        }
+    }  
 	
 	func subscribeToPushNotifications(completion: @escaping ((Error?) -> Void) = { _ in }) {
 		
@@ -77,6 +103,15 @@ class MessagesController {
 			}
 		}
 	}
+    
+    private(set) var searchedUserMessages = [Message]() {
+        didSet {
+            DispatchQueue.main.async {
+                let nc = NotificationCenter.default
+                nc.post(name: MessagesController.DidFinishSearchNotification, object: nil)
+            }
+        }
+    }
 	
 	// MARK: Private Properties
 	

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4668EB34202919AE001669FE /* MessageSearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4668EB33202919AE001669FE /* MessageSearchTableViewController.swift */; };
 		9D81D7301D15A94600412253 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D81D72F1D15A94600412253 /* CloudKit.framework */; };
 		9DFE1B5E1D15F40100F80375 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DFE1B5C1D15F40100F80375 /* AppDelegate.swift */; };
 		9DFE1B5F1D15F40100F80375 /* MessagesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DFE1B5D1D15F40100F80375 /* MessagesListViewController.swift */; };
@@ -34,6 +35,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4668EB33202919AE001669FE /* MessageSearchTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageSearchTableViewController.swift; sourceTree = "<group>"; };
 		9D81D7191D15A72E00412253 /* BulletinBoard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BulletinBoard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D81D72F1D15A94600412253 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		9DFE1B5C1D15F40100F80375 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -61,6 +63,40 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4668EB2F20291917001669FE /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				4668EB33202919AE001669FE /* MessageSearchTableViewController.swift */,
+				9DFE1B5D1D15F40100F80375 /* MessagesListViewController.swift */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		4668EB302029191F001669FE /* Model Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				9DFE1B7D1D1A365900F80375 /* MessagesController.swift */,
+			);
+			path = "Model Controllers";
+			sourceTree = "<group>";
+		};
+		4668EB3120291926001669FE /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				9DFE1B811D1A37CF00F80375 /* CloudKitManager.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		4668EB322029192C001669FE /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				9DFE1B7B1D1A365900F80375 /* Message.swift */,
+				9DFE1B7C1D1A365900F80375 /* Message+CloudKit.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		9D81D7101D15A72E00412253 = {
 			isa = PBXGroup;
 			children = (
@@ -91,11 +127,10 @@
 			isa = PBXGroup;
 			children = (
 				9DFE1B5C1D15F40100F80375 /* AppDelegate.swift */,
-				9DFE1B5D1D15F40100F80375 /* MessagesListViewController.swift */,
-				9DFE1B7D1D1A365900F80375 /* MessagesController.swift */,
-				9DFE1B7B1D1A365900F80375 /* Message.swift */,
-				9DFE1B811D1A37CF00F80375 /* CloudKitManager.swift */,
-				9DFE1B7C1D1A365900F80375 /* Message+CloudKit.swift */,
+				4668EB2F20291917001669FE /* View Controllers */,
+				4668EB302029191F001669FE /* Model Controllers */,
+				4668EB322029192C001669FE /* Models */,
+				4668EB3120291926001669FE /* Helpers */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -196,6 +231,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9DFE1B801D1A365900F80375 /* MessagesController.swift in Sources */,
+				4668EB34202919AE001669FE /* MessageSearchTableViewController.swift in Sources */,
 				9DFE1B7F1D1A365900F80375 /* Message+CloudKit.swift in Sources */,
 				9DFE1B821D1A37CF00F80375 /* CloudKitManager.swift in Sources */,
 				9DFE1B7E1D1A365900F80375 /* Message.swift in Sources */,

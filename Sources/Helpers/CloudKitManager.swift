@@ -49,4 +49,41 @@ class CloudKitManager {
 			completion(error)
 		}) 
 	}
+    
+    // MARK: - User Discoverability
+    
+    func requestDiscoverabilityAuthorization(completion: @escaping (CKApplicationPermissionStatus, Error?) -> Void) {
+        
+        CKContainer.default().status(forApplicationPermission: .userDiscoverability) { (permissionStatus, error) in
+            
+            guard permissionStatus != .granted else { completion(.granted, error); return }
+            
+            CKContainer.default().requestApplicationPermission(.userDiscoverability, completionHandler: completion)
+        }
+    }
+    
+    func fetchUserIdentityWith(email: String, completion: @escaping (CKUserIdentity?, Error?) -> Void) {
+        
+        CKContainer.default().discoverUserIdentity(withEmailAddress: email, completionHandler: completion)
+    }
+    
+    func fetchAllDiscoverableUserIdentities(completion: @escaping ([CKUserIdentity], Error?) -> Void) {
+        
+        let discoverIdentitiesOp = CKDiscoverAllUserIdentitiesOperation()
+        
+        var discoveredIdentities: [CKUserIdentity] = []
+        
+        discoverIdentitiesOp.userIdentityDiscoveredBlock = { identity in
+            
+            discoveredIdentities.append(identity)
+        }
+        
+        discoverIdentitiesOp.discoverAllUserIdentitiesCompletionBlock = { error in
+            
+            completion(discoveredIdentities, error)
+        }
+        
+        CKContainer.default().add(discoverIdentitiesOp)
+    }
+    
 }
